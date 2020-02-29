@@ -1,0 +1,33 @@
+# CPU hotplug uevent to manage cores
+allow mpdecision self:netlink_kobject_uevent_socket { create setopt bind read };
+
+# Create under /dev/socket/mpdecision
+allow mpdecision mpctl_socket:dir w_dir_perms;
+allow mpdecision mpctl_socket:sock_file create_file_perms;
+
+# 
+allow mpdecision sysfs_mpdecision:dir r_dir_perms;
+allow mpdecision sysfs_mpdecision:file rw_file_perms;
+
+# This is needed to allow mpdecision to look at system_server's
+# /proc/PID/status file.
+r_dir_file(mpdecision, system_server)
+r_dir_file(mpdecision, mediaserver)
+r_dir_file(mpdecision, cameraserver)
+
+allow mpdecision device_latency:chr_file w_file_perms;
+allow mpdecision device_latency:chr_file rw_file_perms;
+
+allow mpdecision system_data_file:dir rw_dir_perms;
+allow mpdecision system_data_file:file r_file_perms;
+
+r_dir_file(mpdecision, hal_camera_default)
+binder_use(mpdecision)
+
+type_transition mpdecision socket_device:sock_file mpctl_socket;
+type_transition mpdecision system_data_file:file mpctl_data_file;
+
+allow mpdecision socket_device:dir add_name;
+allow mpdecision socket_device:dir w_dir_perms;
+allow mpdecision sysfs_devices_system_cpu:file rw_file_perms;
+allow mpdecision system_file:file execmod;

@@ -1,0 +1,8 @@
+# /devices/soc0/{hw_platform,soc_id} (sensors.qcom)
+r_dir_file(sensors, sysfs_socinfo)
+
+# allow sensors self:socket create_socket_perms; ?
+allow sensors self:socket *;
+
+# Talk to qmuxd (qmux_radio)
+qmux_socket(sensors)

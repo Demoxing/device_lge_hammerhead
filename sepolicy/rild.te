@@ -1,0 +1,2 @@
+r_dir_file(rild, radio_data_file)
+allowxperm rild self:udp_socket ioctl priv_sock_ioctls;
