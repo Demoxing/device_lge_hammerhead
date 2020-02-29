@@ -1,0 +1,11 @@
+# Persist firmware types
+type persist_camera_file, file_type;
+type persist_wifi_file, file_type;
+
+type sysfs_rmnet, fs_type, sysfs_type;
+type sysfs_surfaceflinger, fs_type, sysfs_type;
+type sysfs_power_management, fs_type, sysfs_type;
+type sysfs_ramdumps, fs_type, sysfs_type;
+
+type rfkill_device, dev_type;
+
